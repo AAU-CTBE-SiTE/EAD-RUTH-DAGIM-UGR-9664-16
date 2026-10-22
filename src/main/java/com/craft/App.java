@@ -39,12 +39,12 @@ public class App {
             System.out.println("Student updated: " + found);
 
            
-            /*
+            
             em.getTransaction().begin();
             em.remove(found);
             em.getTransaction().commit();
             System.out.println("Student deleted.");
-            */
+            
 
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
