@@ -1,38 +1,43 @@
-# LAB 1 : JAVA MAVEN STARTER PROJECT 
-## About the Project
-This is a Java JDBC project that connects a Java application to a MySQL database to manage student records.
+# Spring Core Lab 3
+
+## Description
+This lab demonstrates the basic concepts of the Spring Core Framework using XML-based configuration and Dependency Injection (DI).
 
 ## Technologies Used
 - Java
-- JDBC (Java Database Connectivity)
-- MySQL
+- Spring Framework
 - Maven
-- Eclipse IDE
+- IntelliJ IDEA
+- Lombok
 
-## Database Information
-**Database name:** `StudentsDB`
+## Project Structure
+text
+src/
+ └── main/
+     ├── java/
+     │   └── com/
+     │       └── craft/
+     │           ├── Address.java
+     │           ├── Student.java
+     │           └── App.java
+     └── resources/
+         └── beansConfig.xml
 
-**Table name:** `students`
 
-The table contains:
-- `id` — Student ID
-- `firstname` — Student's first name
-- `lastname` — Student's last name
-- `grade` — Student's grade
+## Implementation
+- Created an Address class with city and country properties.
+- Created a Student class with id, name, age, and Address properties.
+- Configured the Address and Student beans in beansConfig.xml.
+- Used constructor injection to inject the Address bean into the Student bean.
+- Loaded the Spring application context using ClassPathXmlApplicationContext.
 
-## Features
-- Connect Java to a MySQL database
-- Insert student records
-- Retrieve student information
-- Update student grades
-- Delete student records
-- Calculate the average student grade
+## Output
+text
+Student(id=101, name=John Doe, age=20, address=Address(city=Addis, country=Ethiopia))
 
-## How to Run the Project
-1. Install Java JDK, Eclipse IDE, and MySQL.
-2. Create a MySQL database named `StudentsDB`.
-3. Create the `students` table.
-4. Open the project in Eclipse as a Maven project.
-5. Configure your MySQL username and password in the Java code.
-6. Ensure the MySQL Connector/J dependency is included in `pom.xml`.
-7. Run the Java
+
+## How to Run
+1. Open the project in IntelliJ IDEA.
+2. Allow Maven to load the dependencies.
+3. Run the App.java file.
+4. Check the console for the output.
