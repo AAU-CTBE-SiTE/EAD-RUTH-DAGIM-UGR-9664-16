@@ -1,3 +1,4 @@
+
 package com.craft;
 
 import lombok.Data;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -25,8 +27,12 @@ public class Student {
     private int age;
 
     private Address address;
+
     private Subject[] subjectsArray;
+
     private Set<Subject> subjectsSet;
+
+    private List<Subject> subjectsList;
 
     @Autowired
     public Student(Address address) {
@@ -37,9 +43,12 @@ public class Student {
     public void setSubjectsArray(Subject[] subjectsArray) {
         this.subjectsArray = subjectsArray;
     }
-
     @Autowired
     public void setSubjectsSet(Set<Subject> subjectsSet) {
         this.subjectsSet = subjectsSet;
+    }
+    @Autowired
+    public void setSubjectsList(List<Subject> subjectsList) {
+        this.subjectsList = subjectsList;
     }
 }

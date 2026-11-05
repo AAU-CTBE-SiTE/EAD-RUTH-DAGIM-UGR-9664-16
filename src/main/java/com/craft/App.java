@@ -1,3 +1,4 @@
+
 package com.craft;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -22,6 +23,9 @@ public class App {
 
         System.out.println("\nSet Subjects:");
         System.out.println(student1.getSubjectsSet());
+
+        System.out.println("\nList Subjects:");
+        System.out.println(student1.getSubjectsList());
 
         System.out.println("\nPrototype Scope Test:");
         System.out.println(student1 == student2);
