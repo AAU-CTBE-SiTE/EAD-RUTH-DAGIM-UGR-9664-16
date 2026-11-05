@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="math" class="com.craft.Subject">
+        <property name="subjectName" value="Mathematics"/>
+    </bean>
+
+    <bean id="java" class="com.craft.Subject">
+        <property name="subjectName" value="Java Programming"/>
+    </bean>
+
+    <bean id="spring" class="com.craft.Subject">
+        <property name="subjectName" value="Spring Framework"/>
+    </bean>
+
+    <bean id="student" class="com.craft.Student">
+        <property name="id" value="101"/>
+        <property name="name" value="Ruthi"/>
+        <property name="age" value="20"/>
+
+        <property name="subjectsArray">
+            <array>
+                <ref bean="math"/>
+                <ref bean="java"/>
+                <ref bean="spring"/>
+            </array>
+        </property>
+
+        <property name="subjectsSet">
+            <set>
+                <ref bean="math"/>
+                <ref bean="java"/>
+                <ref bean="spring"/>
+            </set>
+        </property>
+    </bean>
+
+</beans>
