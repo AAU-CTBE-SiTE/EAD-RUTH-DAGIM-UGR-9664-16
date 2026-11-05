@@ -1,30 +1,21 @@
 # Spring Core Lab 4
 
-## Technologies Used
+## Technologies
 - Java 19
-- Spring Framework 6.2.7
+- Spring 6.2.7
 - Maven
 - Lombok
 - IntelliJ IDEA
 
-## Project Structure
-
-text
-SpringCoreLab4/
-├── src/
-│   └── main/
-│       └── java/
-│           └── com/craft/
-│               ├── Address.java
-│               ├── App.java
-│               ├── AppConfig.java
-│               ├── Student.java
-│               └── Subject.java
-├── pom.xml
-└── .gitignore
+## Project Files
+- Address.java
+- Student.java
+- Subject.java
+- AppConfig.java
+- App.java
 
 ## How to Run
 1. Open the project in IntelliJ IDEA.
-2. Load the Maven dependencies.
+2. Wait for Maven to load.
 3. Open App.java.
-4. Run the application.
+4. Click Run.
