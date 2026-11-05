@@ -1,24 +1,37 @@
 package com.craft;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;
 
 public class App {
+
     public static void main(String[] args) {
 
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("beansConfig.xml");
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Student student = context.getBean("student", Student.class);
+        Student student1 = context.getBean(Student.class);
+        Student student2 = context.getBean(Student.class);
 
-        System.out.println(student);
+        System.out.println("Student Details:");
+        System.out.println(student1);
 
-        System.out.println("Array Subjects:");
-        System.out.println(Arrays.toString(student.getSubjectsArray()));
+        System.out.println("\nArray Subjects:");
+        System.out.println(Arrays.toString(student1.getSubjectsArray()));
 
-        System.out.println("Set Subjects:");
-        System.out.println(student.getSubjectsSet());
+        System.out.println("\nSet Subjects:");
+        System.out.println(student1.getSubjectsSet());
+
+        System.out.println("\nPrototype Scope Test:");
+        System.out.println(student1 == student2);
+
+        Address address1 = context.getBean(Address.class);
+        Address address2 = context.getBean(Address.class);
+
+        System.out.println("\nSingleton Scope Test:");
+        System.out.println(address1 == address2);
+
+        context.close();
     }
 }
