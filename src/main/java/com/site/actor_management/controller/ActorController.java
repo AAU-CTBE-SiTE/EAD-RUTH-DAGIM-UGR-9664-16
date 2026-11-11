@@ -16,13 +16,10 @@ public class ActorController {
         actors.add(new Actor(1, "John Doe", "The Great Adventure"));
         actors.add(new Actor(2, "Jane Smith", "Mystery Island"));
     }
-
-
     @GetMapping("/actor")
     public List<Actor> getActorDetails() {
         return actors;
     }
-
 
     @GetMapping("/actor/{id}")
     public Actor getActorById(@PathVariable int id) {
@@ -34,13 +31,11 @@ public class ActorController {
         return null;
     }
 
-
     @PostMapping("/actor")
     public String createActor(@RequestBody Actor actor) {
         actors.add(actor);
         return "Actor created successfully";
     }
-
 
     @PutMapping("/update/{id}")
     public String updateActor(@PathVariable int id, @RequestBody Actor updated) {
@@ -53,6 +48,26 @@ public class ActorController {
         }
         return "Actor not found";
     }
+
+    @PatchMapping("/patch/{id}")
+    public String patchActor(@PathVariable int id, @RequestBody Actor updated) {
+        for (Actor actor : actors) {
+            if (actor.getId() == id) {
+
+                if (updated.getName() != null) {
+                    actor.setName(updated.getName());
+                }
+
+                if (updated.getMovieName() != null) {
+                    actor.setMovieName(updated.getMovieName());
+                }
+
+                return "Actor partially updated successfully";
+            }
+        }
+        return "Actor not found";
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public String deleteActor(@PathVariable int id) {
