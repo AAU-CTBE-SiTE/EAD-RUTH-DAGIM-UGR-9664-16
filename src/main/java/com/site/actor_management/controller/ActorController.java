@@ -1,64 +1,49 @@
 package com.site.actor_management.controller;
 
-import com.site.actor_management.model.Actor;
+import com.site.actor_management.dto.ActorRequest;
+import com.site.actor_management.dto.ActorResponse;
+import com.site.actor_management.service.ActorService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
 public class ActorController {
 
-    List<Actor> actors = new ArrayList<>();
+    private final ActorService service;
 
-    public ActorController() {
-        actors.add(new Actor(1, "John Doe", "The Great Adventure"));
-        actors.add(new Actor(2, "Jane Smith", "Mystery Island"));
+    public ActorController(ActorService service) {
+        this.service = service;
     }
 
     @GetMapping("/actor")
-    public List<Actor> getActors() {
-        return actors;
+    public List<ActorResponse> getActors() {
+        return service.findAll();
     }
 
     @GetMapping("/actor/{id}")
-    public Actor getActorById(@PathVariable int id) {
-        for (Actor actor : actors) {
-            if (actor.getId() == id) {
-                return actor;
-            }
-        }
-        return null;
+    public ActorResponse getActorById(@PathVariable Long id) {
+        return service.findById(id);
     }
 
     @PostMapping("/actor")
-    public String createActor(@RequestBody Actor actor) {
-        actors.add(actor);
-        return "Actor created";
+    @ResponseStatus(HttpStatus.CREATED)
+    public ActorResponse createActor(@Valid @RequestBody ActorRequest request) {
+        return service.create(request);
     }
 
     @PutMapping("/update/{id}")
-    public String updateActor(@PathVariable int id, @RequestBody Actor newActor) {
-        for (Actor actor : actors) {
-            if (actor.getId() == id) {
-                actor.setName(newActor.getName());
-                actor.setMovieName(newActor.getMovieName());
-                return "Actor updated";
-            }
-        }
-        return "Actor not found";
+    public ActorResponse updateActor(@PathVariable Long id, @Valid @RequestBody ActorRequest request) {
+        return service.update(id, request);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteActor(@PathVariable int id) {
-        for (Actor actor : actors) {
-            if (actor.getId() == id) {
-                actors.remove(actor);
-                return "Actor deleted";
-            }
-        }
-        return "Actor not found";
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteActor(@PathVariable Long id) {
+        service.delete(id);
     }
 
     @GetMapping("/error-test")
