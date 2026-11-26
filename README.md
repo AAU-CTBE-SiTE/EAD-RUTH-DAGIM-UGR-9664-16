@@ -1,38 +1,41 @@
-# LAB 1 : JAVA MAVEN STARTER PROJECT 
-## About the Project
-This is a Java JDBC project that connects a Java application to a MySQL database to manage student records.
+# LAB 9: Microservices
 
-## Technologies Used
-- Java
-- JDBC (Java Database Connectivity)
-- MySQL
-- Maven
-- Eclipse IDE
+Two Spring Boot services that communicate using `RestClient`.
 
-## Database Information
-**Database name:** `StudentsDB`
+| Service          | Port | Database |
+|------------------|------|----------|
+| customer_service | 8080 | MongoDB  |
+| order_service    | 8081 | MySQL    |
 
-**Table name:** `students`
+## How they communicate
+Each order stores a `customerId` (one order per customer).
+The order service uses `RestClient` to get the customer's details from the customer service.
 
-The table contains:
-- `id` — Student ID
-- `firstname` — Student's first name
-- `lastname` — Student's last name
-- `grade` — Student's grade
+## Run
+1. Start MongoDB and MySQL.
+2. Set your MySQL password in `order_service/src/main/resources/application.properties`.
+3. Run `CustomerServiceApplication`.
+4. Run `OrderServiceApplication`.
 
-## Features
-- Connect Java to a MySQL database
-- Insert student records
-- Retrieve student information
-- Update student grades
-- Delete student records
-- Calculate the average student grade
+## Customer endpoints (port 8080)
+| Method | URL                 | Action          |
+|--------|---------------------|-----------------|
+| POST   | /api/customers      | Save customer   |
+| GET    | /api/customers      | List customers  |
+| GET    | /api/customers/{id} | Get by ID       |
+| DELETE | /api/customers/{id} | Delete customer |
 
-## How to Run the Project
-1. Install Java JDK, Eclipse IDE, and MySQL.
-2. Create a MySQL database named `StudentsDB`.
-3. Create the `students` table.
-4. Open the project in Eclipse as a Maven project.
-5. Configure your MySQL username and password in the Java code.
-6. Ensure the MySQL Connector/J dependency is included in `pom.xml`.
-7. Run the Java
+## Order endpoints (port 8081)
+| Method | URL                               | Action                  |
+|--------|-----------------------------------|-------------------------|
+| POST   | /api/orders                       | Save order              |
+| GET    | /api/orders                       | List orders             |
+| GET    | /api/orders/{id}                  | Order with its customer |
+| GET    | /api/orders/customer/{customerId} | A customer's order      |
+
+## Sample requests
+Customer:
+{"id": 1, "name": "Alice", "email": "alice@example.com"}
+
+Order:
+{"product": "Laptop", "quantity": 1, "price": 800, "customerId": 1}
